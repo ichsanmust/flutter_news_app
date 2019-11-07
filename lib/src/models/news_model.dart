@@ -63,4 +63,34 @@ class _Article {
   String get urlToImage => _urlToImage;
   String get publishedAt => _publishedAt;
   String get content => _content;
+
+  set id(String id) {
+    _id = id;
+  }
+  set name(String name) {
+    _name = name;
+  }
+  set author(String author) {
+    _author = author;
+  }
+  set title(String title) {
+    _title = title;
+  }
+  set description(String description) {
+    _description = description;
+  }
+  set url(String url) {
+    _url = url;
+  }
+  set urlToImage(String urlToImage) {
+    _urlToImage = urlToImage;
+  }
+  set publishedAt(String publishedAt) {
+    _publishedAt = publishedAt;
+  }
+  set content(String content) {
+    _content = content;
+  }
+  
+
 }

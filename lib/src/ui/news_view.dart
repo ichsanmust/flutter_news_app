@@ -1,15 +1,34 @@
 import 'package:flutter/material.dart';
 import 'package:division/division.dart';
 import 'package:transparent_image/transparent_image.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class NewsView extends StatefulWidget {
+
+  NewsView({Key key, this.item}) : super(key: key);
+  final item;
+
   @override
   _NewsViewState createState() => _NewsViewState();
 }
 
 class _NewsViewState extends State<NewsView> {
+  
+
+  _launchURL(url) async {
+    print(url);
+    await launch(url);
+  // if (await canLaunch(url)) {
+  //   await launch(url);
+  // } else {
+  //   throw 'Could not launch $url';
+  // }
+}
+
+
   @override
   Widget build(BuildContext context) {
+    // print(widget.item);
     return Scaffold(
       appBar: AppBar(
         title: Text('News'),
@@ -18,7 +37,7 @@ class _NewsViewState extends State<NewsView> {
         child: Column(
           children: <Widget>[
             Expanded(
-              flex: 8,
+              flex: 15,
               child: ListView(
                 children: <Widget>[
                   Parent(
@@ -33,7 +52,7 @@ class _NewsViewState extends State<NewsView> {
                       child: FadeInImage.memoryNetwork(
                         placeholder: kTransparentImage,
                         image:
-                            'https://media.hitekno.com/thumbs/2019/03/03/67508-ilustrasi-whatsapp/730x480-img-67508-ilustrasi-whatsapp.jpg',
+                            widget.item.urlToImage,
                       ),
                     ),
                   ),
@@ -44,7 +63,7 @@ class _NewsViewState extends State<NewsView> {
                       ..elevation(5)
                       ..padding(all: 5)
                       ..borderRadius(all: 10)
-                      ..minHeight(100),
+                      ..minHeight(300),
                     child: Column(
                       children: <Widget>[
                         Container(
@@ -53,7 +72,7 @@ class _NewsViewState extends State<NewsView> {
                                   ..width(MediaQuery.of(context).size.width)
                                   ..padding(left: 5, right: 5, top: 5),
                                 child: Text(
-                                  'Apple',
+                                  widget.item.title,
                                   style: TextStyle(
                                       fontWeight: FontWeight.bold,
                                       fontSize: 16),
@@ -64,7 +83,7 @@ class _NewsViewState extends State<NewsView> {
                                   ..width(MediaQuery.of(context).size.width)
                                   ..padding(left: 5, right: 5, top: 5),
                                 child: Text(
-                                  'Liputan 6',
+                                  widget.item.name,
                                   style: TextStyle(fontSize: 14),
                                 ))),
                         Container(
@@ -75,7 +94,7 @@ class _NewsViewState extends State<NewsView> {
                                 child: Align(
                                     alignment: Alignment.centerRight,
                                     child: Text(
-                                      'a day ago',
+                                      widget.item.publishedAt,
                                       style: TextStyle(fontSize: 12),
                                     )))),
                         Container(
@@ -86,7 +105,8 @@ class _NewsViewState extends State<NewsView> {
                                 child: Align(
                                     alignment: Alignment.topLeft,
                                     child: Text(
-                                      'is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum',
+                                      // 'is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum',
+                                      ' ${widget.item.description}',
                                       textAlign: TextAlign.justify,
                                     )))),
                         Divider(),
@@ -96,21 +116,22 @@ class _NewsViewState extends State<NewsView> {
                 ],
               ),
             ),
-            // Expanded(
-            //   flex: 1,
-            //   child: Parent(
-            //       style: ParentStyle()
-            //         ..background.color(Colors.deepPurple)
-            //         ..borderRadius(all: 10)
-            //         ..margin(all: 20)
-            //         ..width(MediaQuery.of(context).size.width),
-            //       child: FlatButton(
-            //         child: Text('back'),
-            //         onPressed: () {
-            //           Navigator.pop(context, 'cancel');
-            //         },
-            //       )),
-            // )
+            Expanded(
+              flex: 2,
+              child: Parent(
+                  style: ParentStyle()
+                    ..background.color(Colors.deepPurple)
+                    ..borderRadius(all: 10)
+                    ..margin(left: 10,right: 10, bottom: 10)
+                    ..width(MediaQuery.of(context).size.width),
+                  child: FlatButton(
+                    child: Text('Go to Website'),
+                    onPressed: () {
+                      // Navigator.pop(context, 'cancel');
+                      _launchURL(widget.item.url);
+                    },
+                  )),
+            )
           ],
         ),
       ),

@@ -28,40 +28,26 @@ class NewsDataProvider {
     return false;
   }
 
-  // Future<NewsModel> getListNews({country : 'us'}) async {
-  //   if (await checkInternConnection() == false) {
-  //     return NewsModel.error('error', 'No Internet Connection');
-  //   }
-
-  //   String url =
-  //       '$baseUrl/top-headlines?apiKey=$apiKey&country=$country&&category=technology&pageSize=5&page=1';
-
-  //   // var response = await ioClient.get(url, headers: {
-  //   //    'authorization': 'bearer $token'
-  //   // });
-  //   var response = await http.get(url, headers: {
-  //     // 'authorization': 'bearer $token',
-  //   });
-
-  //   if (response.statusCode == 200) {
-  //     return NewsModel.fromJson(convert.jsonDecode(response.body));
-  //   } else {
-  //     return NewsModel.error('error', 'Something Wrong');
-  //   }
-  // }
-
-
-  Future<NewsModel> getNews({type:'top-headlines', country : 'us', category:'technology', pageSize : 5, page : 1}) async {
+  Future<NewsModel> getNews({type:'top-headlines', country : 'us', category:'technology', pageSize : 5, page : 1, q : 'tech'}) async {
     if (await checkInternConnection() == false) {
       return NewsModel.error('error', 'No Internet Connection');
     }
 
-    String url =
+    String url = '';
+    if(type == 'top-headlines'){
+        url =
         '$baseUrl/$type?apiKey=$apiKey&country=$country&&category=$category&pageSize=$pageSize&page=$page';
-    var response = await http.get(url, headers: {
+    }else{
+      url =
+        '$baseUrl/$type?apiKey=$apiKey&q=$q&pageSize=$pageSize&page=$page';
+   
+    }
+    print(q);
+     var response = await http.get(url, headers: {
       // 'authorization': 'bearer $token',
     });
 
+    // print(response.body);
     if (response.statusCode == 200) {
       return NewsModel.fromJson(convert.jsonDecode(response.body));
     } else {
