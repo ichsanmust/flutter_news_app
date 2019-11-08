@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:division/division.dart';
+// import 'package:division/division.dart';
 import 'package:news_app/src/ui/news_card.dart';
-import 'package:transparent_image/transparent_image.dart';
+// import 'package:transparent_image/transparent_image.dart';
 import 'package:provider/provider.dart';
 
-import 'package:news_app/src/ui/news_view.dart';
+// import 'package:news_app/src/ui/news_view.dart';
 import 'package:news_app/src/blocs/news_bloc.dart';
 import 'package:news_app/src/models/news_model.dart';
 

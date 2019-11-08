@@ -23,7 +23,7 @@ class _HomePageState extends State<HomePage> {
   void initState() {
     super.initState();
     Future.microtask(() => Provider.of<NewsBloc>(context)
-        .getNewsDataHeadlines(q: 'tech')); // on initiate
+        .getNewsDataHeadlines(q: 'indonesia tech')); // on initiate
   }
 
   @override
@@ -33,6 +33,7 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
+    // ini contoh pengesetan data nya di ui, boleh boleh saja tapi lebih bagus di bloc / controller
     final newsBlocData = Provider.of<NewsBloc>(context);
     List<Widget> newsHeadlines = [
       Center(child: CircularProgressIndicator())
@@ -97,7 +98,7 @@ class _HomePageState extends State<HomePage> {
                   ),
                 ),
                 Expanded(
-                  flex: 1,
+                  flex: 3,
                   child: Parent(
                     // style: ParentStyle()
                     //   ..background.color(Colors.red)
@@ -115,15 +116,15 @@ class _HomePageState extends State<HomePage> {
                     ),
                   ),
                 ),
-                Expanded(
-                  flex: 2,
-                  child: Parent(
-                    // style: ParentStyle()
-                    //   ..background.color(Colors.red)
-                    //   ..borderRadius(all: 100),
-                    child : Icon(Icons.more_vert),
-                  ),
-                ),
+                // Expanded(
+                //   flex: 2,
+                //   child: Parent(
+                //     // style: ParentStyle()
+                //     //   ..background.color(Colors.red)
+                //     //   ..borderRadius(all: 100),
+                //     child: Icon(Icons.more_vert),
+                //   ),
+                // ),
               ],
             ),
           ),
@@ -152,7 +153,7 @@ class _HomePageState extends State<HomePage> {
                       text: 'Science',
                     ),
                     Tab(
-                      text: 'sports',
+                      text: 'Sports',
                     ),
                     Tab(
                       text: 'Entertainment',

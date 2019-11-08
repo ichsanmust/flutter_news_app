@@ -28,22 +28,28 @@ class NewsDataProvider {
     return false;
   }
 
-  Future<NewsModel> getNews({type:'top-headlines', country : 'us', category:'technology', pageSize : 5, page : 1, q : 'tech'}) async {
+  Future<NewsModel> getNews(
+      {type: 'top-headlines',
+      country: 'us',
+      category: 'technology',
+      pageSize: 5,
+      page: 1,
+      q: 'tech'}) async {
     if (await checkInternConnection() == false) {
       return NewsModel.error('error', 'No Internet Connection');
     }
 
     String url = '';
-    if(type == 'top-headlines'){
-        url =
-        '$baseUrl/$type?apiKey=$apiKey&country=$country&&category=$category&pageSize=$pageSize&page=$page';
-    }else{
+    if (type == 'top-headlines') {
       url =
-        '$baseUrl/$type?apiKey=$apiKey&q=$q&pageSize=$pageSize&page=$page';
-   
+          '$baseUrl/$type?apiKey=$apiKey&country=$country&&category=$category&pageSize=$pageSize&page=$page';
+    } else {
+      url = '$baseUrl/$type?apiKey=$apiKey&q=$q&pageSize=$pageSize&page=$page';
     }
+    // print(url);
     // print(q);
-     var response = await http.get(url, headers: {
+    // print(page);
+    var response = await http.get(url, headers: {
       // 'authorization': 'bearer $token',
     });
 

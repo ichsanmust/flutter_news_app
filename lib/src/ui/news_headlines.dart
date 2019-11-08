@@ -8,15 +8,13 @@ class NewsHeadlines extends StatelessWidget {
   NewsHeadlines({this.item});
 
   var item;
-  
 
   @override
   Widget build(BuildContext context) {
-
     if (item.urlToImage == null) {
-        item.urlToImage =
-            'https://media.hitekno.com/thumbs/2019/03/03/67508-ilustrasi-whatsapp/730x480-img-67508-ilustrasi-whatsapp.jpg';
-      }
+      item.urlToImage =
+          'https://media.hitekno.com/thumbs/2019/03/03/67508-ilustrasi-whatsapp/730x480-img-67508-ilustrasi-whatsapp.jpg';
+    }
 
     return Parent(
       style: ParentStyle()..padding(all: 0.8),
@@ -24,9 +22,11 @@ class NewsHeadlines extends StatelessWidget {
         ..onTap(() {
           // print('haha');
           Navigator.push(
-              context, MaterialPageRoute(builder: (context) => NewsView(
-                item: item,
-              )));
+              context,
+              MaterialPageRoute(
+                  builder: (context) => NewsView(
+                        item: item,
+                      )));
         }),
       child: Row(
         children: <Widget>[
@@ -42,8 +42,7 @@ class NewsHeadlines extends StatelessWidget {
                   borderRadius: BorderRadius.circular(5),
                   color: Colors.blue,
                   image: DecorationImage(
-                      image: new NetworkImage(
-                          item.urlToImage),
+                      image: new NetworkImage(item.urlToImage),
                       fit: BoxFit.fill)),
             ),
             // child : Container(

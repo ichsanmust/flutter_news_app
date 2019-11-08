@@ -14,32 +14,12 @@ class App extends StatelessWidget {
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
         title: 'Flutter News Application',
-        // theme: ThemeData(
-        //   primarySwatch: Colors.deepPurple,
-        // ),
         theme: ThemeData.dark().copyWith(
           canvasColor: Colors.transparent,
           primaryColor: Colors.black,
-          // textTheme: Theme.of(context).textTheme.apply(
-          //       bodyColor: Colors.pink,
-          //       displayColor: Colors.pink,
-          //     ),
         ),
-
-        // darkTheme: ThemeData.dark(),
         home: SplashScreen(),
       ),
-      // child: Consumer<Counter>(
-      //   builder: (context, counter, _) {
-      //     return MaterialApp(
-      //       title: 'Flutter Demo',
-      //       theme: ThemeData(
-      //         primarySwatch: Colors.blue,
-      //       ),
-      //       home: MyHomePage(title: 'Flutter Demo Home Page'),
-      //     );
-      //   },
-      // ),
     );
   }
 }

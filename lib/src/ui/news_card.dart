@@ -21,7 +21,7 @@ Widget newsCard(context, item) {
               borderRadius: new BorderRadius.circular(10.0),
               child: FadeInImage.memoryNetwork(
                 placeholder: kTransparentImage,
-                image: item.urlToImage,
+                image: '${item.urlToImage}',
               ),
             ),
             // child: Container(
@@ -56,7 +56,7 @@ Widget newsCard(context, item) {
                   child: Align(
                       alignment: Alignment.topLeft,
                       child: Text(
-                        item.title,
+                        '${item.title}',
                         style: TextStyle(
                             fontSize: 16, fontWeight: FontWeight.bold),
                       )),
@@ -66,7 +66,7 @@ Widget newsCard(context, item) {
                   child: Align(
                       alignment: Alignment.centerRight,
                       child: Text(
-                        item.publishedAt,
+                        '${item.publishedAt}',
                         style: TextStyle(fontSize: 10),
                       )),
                 )
@@ -86,10 +86,8 @@ Widget newsCard(context, item) {
     gesture: GestureClass()
       ..onTap(() {
         // print('haha');
-        Navigator.push(
-            context, MaterialPageRoute(builder: (context) => NewsView(
-              item : item
-            )));
+        Navigator.push(context,
+            MaterialPageRoute(builder: (context) => NewsView(item: item)));
       }),
   );
 }

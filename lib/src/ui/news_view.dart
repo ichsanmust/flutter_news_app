@@ -4,7 +4,6 @@ import 'package:transparent_image/transparent_image.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class NewsView extends StatefulWidget {
-
   NewsView({Key key, this.item}) : super(key: key);
   final item;
 
@@ -13,18 +12,15 @@ class NewsView extends StatefulWidget {
 }
 
 class _NewsViewState extends State<NewsView> {
-  
-
   _launchURL(url) async {
     print(url);
     await launch(url);
-  // if (await canLaunch(url)) {
-  //   await launch(url);
-  // } else {
-  //   throw 'Could not launch $url';
-  // }
-}
-
+    // if (await canLaunch(url)) {
+    //   await launch(url);
+    // } else {
+    //   throw 'Could not launch $url';
+    // }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -51,8 +47,7 @@ class _NewsViewState extends State<NewsView> {
                       ),
                       child: FadeInImage.memoryNetwork(
                         placeholder: kTransparentImage,
-                        image:
-                            widget.item.urlToImage,
+                        image: widget.item.urlToImage,
                       ),
                     ),
                   ),
@@ -122,7 +117,7 @@ class _NewsViewState extends State<NewsView> {
                   style: ParentStyle()
                     ..background.color(Colors.deepPurple)
                     ..borderRadius(all: 10)
-                    ..margin(left: 10,right: 10, bottom: 10)
+                    ..margin(left: 10, right: 10, bottom: 10)
                     ..width(MediaQuery.of(context).size.width),
                   child: FlatButton(
                     child: Text('Go to Website'),
