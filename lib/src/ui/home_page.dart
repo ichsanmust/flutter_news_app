@@ -7,6 +7,7 @@ import 'package:news_app/src/blocs/news_bloc.dart';
 import 'package:news_app/src/ui/news_list.dart';
 import 'package:news_app/src/ui/news_headlines.dart';
 import 'package:carousel_slider/carousel_slider.dart';
+import 'package:news_app/src/ui/news_search.dart';
 import 'package:provider/provider.dart';
 
 class HomePage extends StatefulWidget {
@@ -21,9 +22,8 @@ class _HomePageState extends State<HomePage> {
   @override
   void initState() {
     super.initState();
-    Future.microtask(() => Provider.of<NewsBloc>(context).getNewsDataHeadlines(
-      q: 'tech'
-    )); // on initiate
+    Future.microtask(() => Provider.of<NewsBloc>(context)
+        .getNewsDataHeadlines(q: 'tech')); // on initiate
   }
 
   @override
@@ -34,7 +34,9 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     final newsBlocData = Provider.of<NewsBloc>(context);
-    List<Widget> newsHeadlines = [Center(child: CircularProgressIndicator())]; // initiale
+    List<Widget> newsHeadlines = [
+      Center(child: CircularProgressIndicator())
+    ]; // initiale
     if (newsBlocData.newsDataHeadlines != null) {
       newsHeadlines.clear();
       for (var item in newsBlocData.newsDataHeadlines.article) {
@@ -100,7 +102,17 @@ class _HomePageState extends State<HomePage> {
                     // style: ParentStyle()
                     //   ..background.color(Colors.red)
                     //   ..borderRadius(all: 100),
-                    child: Icon(Icons.search),
+                    // child: Icon(Icons.search),
+                    child: IconButton(
+                      icon: Icon(Icons.search),
+                      tooltip: 'Search',
+                      onPressed: () {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => NewsSearch()));
+                      },
+                    ),
                   ),
                 ),
                 Expanded(
@@ -109,7 +121,7 @@ class _HomePageState extends State<HomePage> {
                     // style: ParentStyle()
                     //   ..background.color(Colors.red)
                     //   ..borderRadius(all: 100),
-                    child: Icon(Icons.more_vert),
+                    child : Icon(Icons.more_vert),
                   ),
                 ),
               ],

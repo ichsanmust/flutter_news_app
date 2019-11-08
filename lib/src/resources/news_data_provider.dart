@@ -42,7 +42,7 @@ class NewsDataProvider {
         '$baseUrl/$type?apiKey=$apiKey&q=$q&pageSize=$pageSize&page=$page';
    
     }
-    print(q);
+    // print(q);
      var response = await http.get(url, headers: {
       // 'authorization': 'bearer $token',
     });

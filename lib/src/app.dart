@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:news_app/src/blocs/news_bloc.dart';
-import 'package:news_app/src/ui/home_page.dart';
+// import 'package:news_app/src/ui/home_page.dart';
+import 'package:news_app/src/ui/splash_screen.dart';
 import 'package:provider/provider.dart';
 
 class App extends StatelessWidget {
@@ -26,7 +27,7 @@ class App extends StatelessWidget {
         ),
 
         // darkTheme: ThemeData.dark(),
-        home: HomePage(title: 'Flutter News Application'),
+        home: SplashScreen(),
       ),
       // child: Consumer<Counter>(
       //   builder: (context, counter, _) {

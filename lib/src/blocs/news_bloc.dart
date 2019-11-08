@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:news_app/src/components/debouncer.dart';
 
 import 'package:news_app/src/models/news_model.dart';
 import 'package:news_app/src/resources/news_data_provider.dart';
@@ -9,16 +10,9 @@ class NewsBloc with ChangeNotifier {
   bool _isLoading = false;
   bool get isLoading => _isLoading;
 
-  int _count = 0;
-  int get count => _count;
-  void increment() {
-    _count++;
-    notifyListeners();
-  }
-
-  NewsBloc() {
-    getNews();
-  }
+  // NewsBloc() {
+  //   getNews();
+  // }
 
   Future<dynamic> _newsFuture;
   Future<dynamic> get newsFuture => _newsFuture;
@@ -46,7 +40,7 @@ class NewsBloc with ChangeNotifier {
     }
 
     notifyListeners();
-    return _newsData;
+    // return _newsData;
   }
 
 
@@ -67,5 +61,54 @@ class NewsBloc with ChangeNotifier {
     // return _newsDataHeadlines;
   }
 
+
+  TextEditingController _searchController = new TextEditingController();
+  TextEditingController get searchController => _searchController;
+  ScrollController scrollController = new ScrollController();
+
+  Future<dynamic> _newsFutureSearch ;
+  Future<dynamic> get newsFutureSearch => _newsFutureSearch;
+  NewsModel _newsDataSearch;
+  NewsModel get newsDataSearch => _newsDataSearch;
+  List tempNewsHeadsearch = [];
+
+  void setSearchController(value) {
+    _searchController.text = value;
+    notifyListeners();
+  }
+
+  Future<void>onSearchTextChanged({type : 'everything', pageSize : 5, page : 1, q : 'tech'}) async {
+      print(q);
+      if(q == ''){ // jika query null reset
+        _newsDataSearch == null;
+         tempNewsHeadsearch.clear();
+         notifyListeners();
+         return _newsDataSearch;
+      }
+       _newsFutureSearch = bloc.getNews(
+        type: type,
+        page: pageSize,
+        pageSize: pageSize,
+        q : q,
+      );
+      _newsDataSearch = await _newsFutureSearch;
+
+      if(_newsDataSearch.status == 'ok'){
+        if(q == _searchController.text ){ // artinya call next page
+          tempNewsHeadsearch.addAll(_newsDataSearch.article);
+        }else{ // artinya new query
+          tempNewsHeadsearch.clear();
+          tempNewsHeadsearch.addAll(_newsDataSearch.article);
+        }
+      }else{
+        tempNewsHeadsearch.clear();
+      }
+
+      notifyListeners();
+      return _newsDataSearch;
+  }
+  
+  final debouncer = Debouncer(milliseconds: 500);
+  double listViewItemHeight = 50.0;
 
 }
